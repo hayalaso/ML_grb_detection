@@ -12,7 +12,7 @@ grbs=sliced_burstcat2.get_table(columns=('trigger_name','trigger_time','t90'))
 
 trig_finder = TriggerFtp()
 
-for g in range(20):
+for g in range(20,51):
 
     trigname = grbs.trigger_name[g][2:]
     trigdir = os.path.join("../grbs",grbs.trigger_name[g])
