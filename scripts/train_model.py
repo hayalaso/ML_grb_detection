@@ -50,8 +50,8 @@ threshold = np.mean(train_loss) + np.std(train_loss)
 
 
 
-n,b,p=plt.hist(train_loss[None,:], bins=50,label="train",range=(0,0.1),alpha=0.7)
-plt.vlines(threshold,0,max(n),'red')
+n,b,p=plt.hist(train_loss[None,:], bins=50,label="Background",range=(0,0.1),histtype='step',linewidth=2,color='gray')
+plt.vlines(threshold,0,max(n),'blue')
 plt.xlabel("Loss")
 plt.ylabel("No of examples")
 
@@ -62,13 +62,14 @@ labels_grbs = np.zeros(len(data_grbs))
 
 max_val=np.amax(data_grbs[:,80:],1)
 data_grbs = data_grbs/max_val[:,None]
-print(max_val)
-print(data_grbs)
 data_grbs = np.asarray(data_grbs).astype(np.float32)
+
+print(len(df_grbs))
 
 reconstructions = autoencoder.predict(data_grbs)
 grb_loss = tf.keras.losses.mae(reconstructions,data_grbs)
-plt.hist(grb_loss[None,:], bins=50,label='real',range=(0,0.1),alpha=0.7)
+plt.hist(grb_loss[None,:], bins=50,label='GRBs',range=(0,0.1),alpha=0.7,color='red')
 plt.yscale('log')
 plt.grid()
+plt.legend()
 plt.show()

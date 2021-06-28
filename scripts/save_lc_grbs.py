@@ -25,6 +25,7 @@ for d in directories:
         name=f[8:22]
         tempdf['name']=name
         frames.append(tempdf)
+        break
 
 df=pd.concat(frames,ignore_index=True)
 df.to_csv('../simulation/grbs.csv',index=False)
